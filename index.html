@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarot Andino — Arcanos del Tawantinsuyu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars-far"></div>
+  <div class="stars"></div>
+  <div class="mist"></div>
+
+  <header class="hero">
+    <p class="kicker">Tarot del Tawantinsuyu</p>
+    <h1>Arcanos Andinos</h1>
+    <p class="subtitle">Las cartas hablan en voz baja. Acércate.</p>
+  </header>
+
+  <main id="app">
+
+    <!-- 1. Selector de tirada -->
+    <section class="screen active" id="screen-select" data-screen="select">
+      <div class="spread-options">
+        <button class="spread-btn" data-spread="1">
+          <span class="spread-label">Una carta</span>
+          <span class="spread-desc">La pregunta del día</span>
+        </button>
+        <button class="spread-btn" data-spread="3">
+          <span class="spread-label">Tres cartas</span>
+          <span class="spread-desc">Pasado · Presente · Porvenir</span>
+        </button>
+      </div>
+      <p class="hint">Mazo completo: <strong>78 arcanos</strong> — 22 Mayores y 56 Menores andinos.</p>
+    </section>
+
+    <!-- 2. Baraje -->
+    <section class="screen" id="screen-shuffle" data-screen="shuffle">
+      <div class="deck-stage" id="deck-stage" role="button" tabindex="0" aria-label="Detener el baraje">
+        <div class="deck-card" style="--i:0"></div>
+        <div class="deck-card" style="--i:1"></div>
+        <div class="deck-card" style="--i:2"></div>
+        <div class="deck-card" style="--i:3"></div>
+        <div class="deck-card" style="--i:4"></div>
+        <div class="deck-card" style="--i:5"></div>
+        <div class="deck-card" style="--i:6"></div>
+      </div>
+      <p class="instruction shuffle-instruction">
+        Las cartas se mueven entre tus manos.<br>
+        Tócalas cuando estés listo.
+      </p>
+    </section>
+
+    <!-- 3. Cartas boca abajo (selección revelación) -->
+    <section class="screen" id="screen-cards" data-screen="cards">
+      <div class="cards-row" id="cards-row"></div>
+      <p class="instruction reveal-instruction" id="cards-instruction">
+        Toca cada carta para revelarla.
+      </p>
+    </section>
+
+    <!-- 4. Lectura -->
+    <section class="screen" id="screen-reading" data-screen="reading">
+      <div class="readings-container" id="readings-container"></div>
+      <div class="closing" id="closing"></div>
+      <button class="reshuffle" id="reshuffle">Volver a barajar</button>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Cuando dudes, toca otra vez.</p>
+  </footer>
+
+<script src="app.js"></script>
+</body>
+</html>
