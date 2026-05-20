@@ -541,3 +541,274 @@ main#app {
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0,0,0,0.9);
 }
+
+/* =================================================================
+   OPTIMIZACIÓN MOBILE
+   ================================================================= */
+
+/* Tap experience: sin highlight gris, sin delay de 300ms */
+a, button, .card, .deck-stage, .spread-btn, .reshuffle {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Altura dinámica que se adapta a la barra del navegador móvil */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+
+/* Safe-area para iPhone con notch */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(4vw, env(safe-area-inset-left));
+    padding-right: max(4vw, env(safe-area-inset-right));
+    padding-bottom: max(10vh, env(safe-area-inset-bottom));
+  }
+}
+
+/* Sin hover-stickiness en dispositivos táctiles */
+@media (hover: none) {
+  .spread-btn:hover,
+  .deck-stage:hover,
+  .reshuffle:hover,
+  .gallery-card:hover .card-img {
+    transform: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6),
+                inset 0 0 0 4px rgba(10,7,22,0.85),
+                inset 0 0 0 5px rgba(212,168,90,0.3);
+  }
+  .spread-btn:active {
+    background: rgba(40, 28, 75, 0.9);
+    border-color: var(--gold);
+  }
+  .reshuffle:active {
+    background: rgba(212, 168, 90, 0.18);
+    color: var(--gold-bright);
+  }
+}
+
+/* Tablet / phone landscape (≤ 720px) */
+@media (max-width: 720px) {
+  body {
+    padding: 2.5vh 4vw 8vh;
+  }
+
+  /* HERO más compacto */
+  .hero {
+    padding: 1vh 0 2.5vh;
+  }
+  .hero .kicker {
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
+    margin-bottom: 0.8em;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 8.5vw, 2.6rem);
+    letter-spacing: 0.1em;
+  }
+  .hero .subtitle {
+    font-size: 0.98rem;
+  }
+
+  /* Selector: botones apilados, ancho completo */
+  #screen-select { padding: 2vh 0; }
+  .spread-options {
+    flex-direction: column;
+    gap: 1em;
+    align-items: stretch;
+    margin-bottom: 3vh;
+  }
+  .spread-btn {
+    min-width: 0;
+    width: 100%;
+    padding: 1.5em 1.2em;
+    min-height: 56px;
+  }
+  .spread-btn .spread-label { font-size: 1.2rem; letter-spacing: 0.1em; }
+  .spread-btn .spread-desc  { font-size: 0.92rem; }
+  .hint { font-size: 0.88rem; margin-top: 1.5em; padding: 0 1em; }
+
+  /* Baraje */
+  #screen-shuffle { padding: 2vh 0; }
+  .deck-stage {
+    width: min(220px, 62vw);
+    margin-bottom: 3vh;
+  }
+  .deck-stage::before { inset: -16px; }
+
+  /* Cartas para revelar (selección) */
+  #screen-cards { padding: 1vh 0; }
+  .cards-row {
+    gap: 3.5vh;
+  }
+  .card {
+    width: min(260px, 76vw);
+  }
+  .card-slot-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+  }
+
+  /* Lectura */
+  #screen-reading { padding: 1vh 0; }
+  .readings-container {
+    gap: 5vh;
+  }
+  .readings-container.spread-3 {
+    gap: 7vh;
+  }
+  .reading-text {
+    padding: 0;
+  }
+  .arcano-num {
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-align: center;
+  }
+  .arcano-name {
+    font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+    text-align: center;
+  }
+  .arcano-andean {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .message {
+    font-size: 1.05rem;
+    padding-left: 0.9em;
+    margin-bottom: 1.5em;
+  }
+  .section h3 {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+  }
+  .section p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .position-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+  }
+
+  .closing {
+    font-size: 0.95rem;
+    margin: 2em 0 1em;
+  }
+  .reshuffle {
+    padding: 1em 2em;
+    font-size: 0.74rem;
+    letter-spacing: 0.28em;
+    min-height: 48px;
+  }
+
+  .footer {
+    margin-top: 4vh;
+    font-size: 0.82rem;
+  }
+}
+
+/* Teléfonos pequeños (≤ 380px) */
+@media (max-width: 380px) {
+  body {
+    padding: 2vh 3vw 6vh;
+  }
+  .hero h1 {
+    font-size: 1.65rem;
+    letter-spacing: 0.08em;
+  }
+  .hero .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.26em;
+  }
+  .hero .subtitle { font-size: 0.92rem; }
+  .spread-btn { padding: 1.3em 1em; }
+  .spread-btn .spread-label { font-size: 1.1rem; }
+  .deck-stage { width: min(190px, 68vw); }
+  .card { width: min(260px, 82vw); }
+  .arcano-name { font-size: 1.55rem; }
+  .message { font-size: 1rem; }
+}
+
+/* Mobile landscape (poca altura) */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
+  body { padding: 1.5vh 4vw 3vh; }
+  .hero { padding: 0 0 1vh; }
+  .hero .kicker { margin-bottom: 0.3em; font-size: 0.62rem; }
+  .hero h1 { font-size: 1.5rem; margin-bottom: 0.2em; }
+  .hero .subtitle { font-size: 0.86rem; }
+  .deck-stage { width: 130px; margin-bottom: 1.5vh; }
+  .cards-row { flex-wrap: nowrap; gap: 2vw; }
+  .card { width: min(140px, 22vw); }
+  .spread-options { flex-direction: row; gap: 1.2vw; }
+  .spread-btn { padding: 1em 1.2em; min-width: 0; flex: 1; }
+  .footer { margin-top: 2vh; }
+}
+
+/* Respeto preferencia de menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.2s !important;
+  }
+  .card { animation: none; }
+  .card.flipped { animation: none; }
+  .deck-card { animation: none; }
+  .stars, .stars-far, .mist { animation: none; }
+}
+
+/* ===== GALERÍA: ajustes mobile ===== */
+@media (max-width: 720px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    gap: 3.5vw 3vw !important;
+  }
+  .gallery.minors {
+    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)) !important;
+    gap: 3vw 2.5vw !important;
+  }
+  .gallery-card .arcano { font-size: 0.78rem; }
+  .gallery-card .andean { font-size: 0.7rem; }
+  .gallery-card .num { font-size: 0.6rem; letter-spacing: 0.24em; }
+  .minors .gallery-card .arcano { font-size: 0.72rem; }
+  .minors .gallery-card .andean { font-size: 0.66rem; }
+
+  /* Nav pills: scrollable horizontalmente sin envolver */
+  .nav-pills {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 1vh 3vw;
+  }
+  .nav-pills::-webkit-scrollbar { display: none; }
+  .nav-pills a {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    padding: 0.6em 0.9em;
+    margin: 0 0.15em;
+    min-height: 40px;
+  }
+
+  .section-heading {
+    margin: 4vh auto 1.5vh;
+    padding: 0 1em;
+  }
+  .section-heading p { font-size: 0.92rem; }
+}
+
+@media (max-width: 380px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4vw 3vw !important;
+  }
+  .gallery.minors {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4vw 3vw !important;
+  }
+}
